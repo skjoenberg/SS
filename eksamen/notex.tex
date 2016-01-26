@@ -1,0 +1,302 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{stmaryrd}
+\usepackage{fancyhdr}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+
+\setlength{\parindent}{0in}
+\begin{document}
+
+\section*{Betinget sandsynlighed}
+\textbf{Definition 2.1.1}\\
+\begin{align*}
+  P(A \mid B) = \frac{P(A \cap B)}{P(B)}
+\end{align*}
+
+\subsection*{Bayes formel}
+\textbf{Definition 2.1.1}\\
+\begin{align*}
+  P(A \mid B) = \frac{P(B \mid A) P(A)}{P(B)}
+\end{align*}
+
+\subsection*{Law of total probability (LOTUS)}
+\textbf{Definition 2.3.6}\\
+\begin{align*}
+  P(B) = \sum_{i=1}^{n}{P(B \mid A_i) P(A_i)}
+\end{align*}
+
+\section*{Sandsynlighedsfunktion (PMF)}
+\textbf{Definition 3.2.2}\\
+The \textit{probability mass function} (PMF) of a discrete r.v. $X$ is the function $p_{X}$ given by $p_{X}(x) = P(X = x)$. Note that this is positive if $x$ is in the support of $X$, and $0$ otherwise.
+
+\section*{Fordelingsfunktion (CDF)}
+\textbf{Theorem 3.6.3}\\
+Any CDF $F$ has the following properties:
+\begin{itemize*}
+  \item Increasing: If $x_1 \leq x_2$, then $F(x_1) \leq F(x_2)$.
+  \item Right-continuous: For any $a$, we have $F(a) = \lim_{x \to a^+}{F(x)}$.
+  \item Convergence to $0$ and $1$ in the limits: $\lim_{x \to -\infty}{F(x)} = 0$ and $\lim_{x \to \infty}{F(x)} = 1$
+\end{itemize*}
+
+\section*{Middelværdi}
+\subsection*{Diskret}
+\textbf{Definition 4.1.1}\\
+The \textit{expected value} of a discrete r.v. $X$ whose distinct possible values are $x_1,x_2, \hdots$ is defined by
+\begin{align*}
+  E(X) = \sum_{j=1}^{\infty}{x_j P(X = x)}
+\end{align*}
+
+\subsection*{Kontinuert}
+\textbf{Definition 5.1.9}\\
+The expected value (also called the expectation or mean) of a continous r.v. $X$ with PDF $f$ is\\
+\begin{align*}
+  E(X) = \int^{\infty}_{-\infty}{x f(x)}dx
+\end{align*}
+\subsection*{Lineæritet}
+\textbf{Theorem 4.2.1}\\
+For any r.v.s $X,Y$ and any constant c,
+\begin{align*}
+  E(X + Y) &= E(X) + E(Y)\\
+  E(c \cdot X) &= c \cdot E(X)
+\end{align*}
+
+
+
+\subsection*{Law of the unconscious statistician (LOTUS)}
+\textbf{Theorem 4.5.1}\\
+If $X$ is a discrete r.v. and $g$ is a function from $\mathbb{R}$ to $\mathbb{R}$, then
+\begin{align*}
+  E(g(X)) = \sum_{x}{g(x) P(X = x)},
+\end{align*}
+where the sum is taken over all possible values of $X$.
+
+\section*{Varians}
+\textbf{Definition 4.6.1}\\
+$Var(X) = E(X - E(X))^2$\\
+
+\textbf{Definition 4.6.2}\\
+$Var(X) = E(X^2) - (E(X))^2$
+
+\begin{itemize*}
+  \item $Var(X + c) = Var(X)$ for any constant $c$.
+  \item $Var(c \cdot X) = c^2 \cdot Var(X)$ for any constant $c$.
+  \item If $X$ and $Y$ are independent, then $Var(X + Y) = Var(X) + Var(Y)$.
+  \item $Var(X + Y) \neq Var(X) + Var(Y)$ in general.
+  \item $Var(X) \geq 0$, with equality if and only if $P(X =a) = 1$ for some constant $a$.
+\end{itemize*}
+
+Varians er \underline{ikke} lineær.
+\section*{Spredning}
+\textbf{Definition 4.6.1}\\
+$SD(X) = \sqrt{Var(X)}$
+
+\section*{Uafhængighed}
+\subsection*{Uafhængihed af hændelser}
+\textbf{Definition 2.5.1}\\
+Events $A$ and $B$ are \textit{independent} if
+\begin{align*}
+  P(A \cap B) = P(A)P(B)
+\end{align*}
+If $P(A) > 0$ and $P(B) > 0$, then this is equivalent to $P(A \mid B) = P(A)$ and also equivalent to $P(B \mid A) = P(A)$.
+
+\subsection*{Uafhængihed af stokastiske variable}
+\textbf{Definition 3.8.1}\\
+Random variables $X$ and $Y$ are said to be \textit{independent} if
+\begin{align*}
+  P(X \leq x, Y \leq y) = P(X \leq x)P(Y \leq y)
+\end{align*}
+
+\subsection*{Uafhængihed af stokastiske variable}
+\textbf{Definition 7.1.18}\\
+Random variables $X$ and $Y$ are independent if for all $x$ and $y$, $F_{X,Y} = F_{X}(x)F_{Y}(y)$.\\
+If $X$ and $Y$ are continous with joint PDF $f_{X,Y}$, this is equivalent to the condition $f_{X,Y}(x,y) = f_X(x)f_Y(y)$\\
+for all $x$ and $y$, and it is also equaivalent to the condition $f_{Y | X}(y | x) = f_{Y}(y)$.
+
+\section*{Fordelinger}
+\subsection*{Bernoulli}
+\subsubsection*{PMF}
+\textbf{Definition 3.3.1}\\
+An r.v. $X$ is said to have the Bernoulli distribution with parameter $p$ if $P(X = 1) = p$ and $P(X = 0) = 1 - p$, where $0 < p < 1$. We write this as $X ~ Bern(p)$.
+\subsection*{Binomial}
+\subsubsection*{PMF}
+\textbf{Theorem 3.3.4}\\
+If $X ~ Bin(n,p)$, then the PMF of $X$ is
+\begin{align*}
+  P(X = k) = {n \choose k} p^k (1 - p)^{n-k}
+\end{align*}
+for $k = 0, 1, \hdots, n$ and $P(X = k) = 0$ otherwise.\\
+\subsubsection*{Middelværdi}
+\begin{align*}
+  E(X) = \sum_{k=0}^{n}{k \cdot P(X = k)} = \sum_{k=0}^{n}{k {n \choose k} p^k q^{n-k}}.
+\end{align*}
+\subsubsection*{Varians}
+\textbf{Example 4.6.5}\\
+$Var(X) = np(1-p)$
+
+\subsection*{Hypergeometrisk}
+\subsubsection*{PMF}
+\textbf{Theorem 3.4.2}\\
+If $X ~ HGeom(w,b,n)$, then the PMF of $X$ is
+\begin{align*}
+  P(X = k) = \frac{{w \choose k} \cdot {b \choose n-k}}{{w + b \choose n}}
+\end{align*}
+for integers $k$ satisfying $0 \leq k \leq w$ and $0 \leq n - k \leq b$, and $P(X = k) = 0$ otherwise.
+\subsubsection*{Middelværdi}
+\textbf{Example 4.2.3}\\
+$E(X) = n \cdot \frac{w}{w+b}$
+\subsection*{Geometrisk}
+\textbf{Theorem 4.3.2}\\
+If $X ~ Geom(p)$, then the PMF of $X$ is $P(X = k) = q^k p$ for $k = 0,1,2, \hdots,$ where $q = 1 - p$.
+\subsubsection*{Middelværdi}
+\textbf{Example 4.3.5}\\
+$E(X) = \frac{q}{p}$
+\subsubsection*{Varians}
+\textbf{Example 4.6.4}\\
+$Var(X) = \frac{q}{p^2}$
+\subsection*{Ligefordeling}
+\subsubsection*{Diskret}
+\begin{align*}
+  P(X = x) = \frac{1}{|C|}
+\end{align*}
+\subsubsection*{Kontinuert}
+
+\subsection*{Eksponential}
+
+\subsection*{Normalfordeling}
+
+\section*{Tæthed (PDF)}
+\textbf{Definition 5.1.2}\\
+For a continous r.v. $X$ with CDF $F$, the \textit{probability density function} (PDF) of $X$ is the derivative $f$ of the $CDF$, given by $f(x) = F'(x)$. The \textit{support} of $X$, and of its distribution, is the set of all $x$ where $f(x) > 0$.
+
+\subsection*{Valid PDF}
+The PDF $f$ of a continuous r.v. must satisfy the following two criteria:
+\begin{itemize*}
+  \item Nonnegative: $f(x) \geq 0$.
+  \item Integrates to 1: $\int_{-\infty}^{\infty}{f(x)}dx = 1$
+\end{itemize*}
+\subsection*{PDF to CDF}
+\textbf{Proposition 5.1.3}\\
+Let $X$ be a continuous r.v. with PDF $f$. Then the CDF of $X$ is given by
+\begin{align*}
+  F(x) = \int_{-\infty}^{x}{f(t)}dt
+\end{align*}
+
+\section*{Simultan fordeling}
+\subsection*{Diskret}
+\textbf{Definition 7.1.1}\\
+The \textit{joint CDF}  of r.v.s $X$ and $Y$ is the function $F_{X,Y}$ given by
+\begin{align*}
+  F_{X,Y}(x,y) = P(X \leq x, Y \leq y)
+\end{align*}
+The joint CDF of $n$ r.v.s is defined analogously.
+
+\textbf{Definition 7.1.2}\\
+The \textit{joint PMF} of discrete r.v.s $X$ and $Y$ is the function $p_{X,Y}$ given by
+\begin{align*}
+  p_{X,Y}(X,Y) = P(X = x, Y = y)
+\end{align*}
+
+\begin{align*}
+  \sum_x \sum_y P(X = x, Y = y) = 1
+\end{align*}
+\subsection*{Kontinuert}
+\textbf{Definition 7.1.12}\\
+If $X$ and $Y$ are continous with joint CDF $F_{X,Y}$, their \textit{joint} is the derivative of the joint CDF with respect to $x$ and $y$:
+\begin{align*}
+  f_{X,Y}(x,y) = \frac{\partial^2}{\partial{x} \partial{y}}F_{X,Y}(x,y)
+\end{align*}
+
+\begin{align*}
+  f_{X,Y}(x,y) \geq 0, \text{ and } \int_{-\infty}^{\infty}{\int_{-\infty}^{\infty}{f_{X,Y}(x,y)}dx}dy = 1
+\end{align*}
+\section*{Marginal fordeling}
+\subsection*{Diskret}
+\textbf{Definition 7.1.3}\\
+For discrete r.v.s $X$ and $Y$, the \textit{marginal PMF} of $X$ is
+\begin{align*}
+  P(X = x) = \sum_y P(X = x, Y = y)
+\end{align*}
+
+\subsection*{Kontinuert}
+\textbf{Definition 7.1.13}\\
+\begin{align*}
+  f_{X}(x) = \int_{\infty}^{\infty}{f_{X,Y}(x,y)}dy
+\end{align*}
+Husk, at vi benytter grænserne for $x$ ovenfor.
+\section*{Law of the unconscious statistician}
+\textbf{Theorem 4.5.1}\\
+If $X$ is a discrete r.v. and $g$ is a function from $\mathbb{R}$ to $\mathbb{R}$, then
+\begin{align*}
+  E(g(X)) = \sum_{x}{g(x) P(X = x)}
+\end{align*}
+where the sum is taken over all possible values of $X$.
+
+\section*{Transformationer}
+\subsection*{Skift af variable}
+
+
+
+\section*{Emperiske momenter}
+\textbf{Defition 6.2.1} s.248.\\
+
+\section*{Momentfrembringende funktioner}
+
+\section*{Estimat}
+
+\section*{Estimator}
+
+
+\section*{Maximum likelyhood}
+
+\section*{Sums of Products of Derivation (SPD)}
+
+\section*{Lineær regression}
+Vi arbejder med parvis data, hvor vi vil afgøre, om den ene afhænger lineært af den anden. Vi vil altså lave en model $y(x) = \alpha + \beta x$.\\
+\subsection*{Forudsætninger}
+Forudsætningerne er, at denne model har $Y_1, \hdots, Y_n$, hvor $Y_i ~ N(\alpha + \beta \cdot x_i, \sigma^2)$. Vi lader $x_1, \hdots, x_n$ være "kvovarianter", altså er disse konkrete tal.\\
+Kig efter:\\
+\begin{itemize*}
+  \item Kig om scatterplottet ser linæert ud.
+  \item Hvis støjen skal være normal fordelt, så skal residualplottet skal ikke være trompet formet.
+  \item Man kan også kigge på QQ-plottet for residualerne og se, om punkterne ligger omkring den rette linje.
+\end{itemize*}
+\subsection*{Estimater}
+Man kan aflæse $\hat{\alpha}$ ud fra \texttt{Estimate} under \texttt{(Intercept)}\\
+Man kan aflæse $\hat{\beta}$ ud fra \texttt{Estimate} under \texttt{I(x-tabel - mean(x-tabel))}\\
+Man kan beregne $SSD_x$ vha. den emperiske varians $s^2 = \frac{1}{n-1} \cdot SSD_x \Leftrightarrow (n-1) \cdot s^2 = SSD_x$. $s^2$ er den estimerede varians af x-tabellen.\\
+Man kan berenge $\tilde{\sigma}^2$ ved tage residuale error på n-2 degrees of freedom i anden.\\
+Fordelingen af $\hat{\alpha}$ er $\hat{\alpha} \sim N(\alpha, \sigma^2(\frac{1}{n} + \frac{\bar{x}^2}{SSD_x}))$. $\bar{x}$ er middelværdien for x-tabellen.\\
+Fordelingen af $\beta$ er $\beta \sim N(\beta, \sigma^2(SSD_x))$. $\bar{x}$ er middelværdien for x-tabellen.\\
+Fordelingen af $\tilde{\sigma}^2$ er $\tilde{\sigma}^2 \sim \frac{\sigma^2}{n-2}\chi^2_{df=n-2}$.\\
+\subsection*{Konfidensintervaller}
+Man kan udregne konfidensintervallet for $\hat{\alpha}$ ved $\hat{\alpha} \pm t_{n-2, 1-\alpha*/2} \cdot \sigma \sqrt{\frac{1}{n} + \frac{\bar{x}^2}{SSD_x}}$.\\
+Man kan udregne konfidensintervallet for $\hat{\beta}$ ved $\hat{\beta} \pm t_{n-2, 1-\alpha*/2} \cdot \frac{\sqrt{\sigma^2}}{\sqrt{SSD_x}}$.\\
+
+
+\begin{align*}
+  SPD_{xy} = \sum^{n}_{i=1}{(x_i - \bar{x})(x_y - \bar{y})}
+\end{align*}
+
+\section*{Konfidensintervaller (KI)}
+
+\section*{Statistik for en enkelt normalfordelt stikprøve}
+
+\section*{Statistik for en enkelt normalfordelt stikprøve med ukendt varians}
+
+\section*{Statistik for en to uafhængige normalfordelte stikprøver}
+\section*{Integration}
+Stamfunktioner til:\\
+Standard funktioner\\
+Polynomier\\
+$\cos$, $\sin$
+
+
+
+\end{document}
